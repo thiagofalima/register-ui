@@ -1,10 +1,10 @@
 import styled, { css } from "styled-components";
 
-interface IButton{
-    variant: "primary" | "secondary"  // variant? -> Se quiser passar ou não essa prop quando usar o componente
+interface IButtonWrapper{
+    variant?: "primary" | "secondary"  // variant? -> Se quiser passar ou não essa prop quando usar o componente
 }
 
-export const Button = styled.button<IButton>`
+export const ButtonWrapper = styled.button<IButtonWrapper>`
   min-width: 120px;
   width: 100%;
   padding: 2px 12px;
