@@ -15,7 +15,7 @@ export const Header = () => {
     <WrapperContainer>
       <HeaderWrapper>
         <Row>
-          <img src={logo} alt="logo da DIO" />
+          <img src={logo} alt="logo da DIO" width="50"/>
           <BuscarInputContainer>
             <Input placeholder="Buscar..."/>
           </BuscarInputContainer>
