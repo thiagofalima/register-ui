@@ -4,7 +4,7 @@ import { ButtonWrapper } from "./ButtonWrapper";
 interface IButton{
   title: string;
   variant?: "primary" | "secondary";  // Mesmo tipo da outra interface
-  onClick: MouseEventHandler<HTMLButtonElement>
+  onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
 export const Button = ({title, variant="primary", onClick}: IButton) => {
