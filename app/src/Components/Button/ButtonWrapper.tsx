@@ -23,11 +23,15 @@ export const ButtonWrapper = styled.button<IButtonWrapper>`
       height: 33px;
 
       background: #e4105b;
+      border-color: #e4105b;
+
+      &:hover {
+        opacity: 0.6;
+      }
 
       &::after {
         content: "";
         position: absolute;
-        border-color: #e4105b;
         top: -5px;
         left: -6px;
         width: calc(100% + 10px);
