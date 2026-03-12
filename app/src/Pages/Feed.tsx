@@ -55,7 +55,7 @@ const Column = styled.div<{ flex: number }>`
 export const Feed = () => {
   return (
     <>
-      <Header />
+      <Header autenticado={true}/>
       <Container>
         <Column flex={3}>
           <Title>Feed</Title>

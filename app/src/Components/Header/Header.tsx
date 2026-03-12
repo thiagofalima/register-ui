@@ -8,24 +8,39 @@ import {
   Row,
   HeaderWrapper,
 } from "./HeaderWrapper";
-import logo from "../../assets/logo-full.webp"
+import logo from "../../assets/logo-full.webp";
+import { UserPicture } from "./HeaderWrapper";
 
-export const Header = () => {
+interface IHeader {
+  autenticado: boolean;
+}
+
+export const Header = ({ autenticado }: IHeader) => {
   return (
     <WrapperContainer>
       <HeaderWrapper>
         <Row>
-          <img src={logo} alt="logo da DIO" width="50"/>
-          <BuscarInputContainer>
-            <Input placeholder="Buscar..."/>
-          </BuscarInputContainer>
-          <Menu>Live Code</Menu>
-          <Menu>Global</Menu>
+          <img src={logo} alt="logo da DIO" width="50" />
+          {autenticado ? (
+            <>
+              <BuscarInputContainer>
+                <Input placeholder="Buscar..." />
+              </BuscarInputContainer>
+              <Menu>Live Code</Menu>
+              <Menu>Global</Menu>
+            </>
+          ) : null}
         </Row>
         <Row>
-          <MenuRight href="#">Home</MenuRight>
-          <Button title="Entrar" />
-          <Button title="Cadastrar" />
+          {autenticado ? (
+            <UserPicture src="https://avatars.githubusercontent.com/u/137067860?v=4" />
+          ) : (
+            <>
+              <MenuRight href="#">Home</MenuRight>
+              <Button title="Entrar" />
+              <Button title="Cadastrar" />
+            </>
+          )}
         </Row>
       </HeaderWrapper>
     </WrapperContainer>

@@ -49,7 +49,7 @@ export const TextContent = styled.p`
 export const Home = () => {
   return (
     <>
-      <Header />
+      <Header autenticado={false}/>
       <Container>
         <div>
           <Title> 
