@@ -13,7 +13,7 @@ export const Container = styled.main`
   margin-top: 120px;
 
   display: flex;
-  fles-direction: rox;
+  fles-direction: row;
   justify-content: space-between;
   align-items: center;
 `;
@@ -43,7 +43,13 @@ export const TextContent = styled.p`
   margin-bottom: 20px;
   line-height: 22px;
 
-  color: #FFFFFF;
+  color: #ffffff;
+`;
+
+const Column = styled.div<{ flex: number }>`
+  align-self: flex-start;
+  flex: ${({ flex }) => flex};
+  padding-right: 1.5em;
 `;
 
 export const Feed = () => {
@@ -51,8 +57,48 @@ export const Feed = () => {
     <>
       <Header />
       <Container>
-        <Card />
-        <UserInfo percentual={35} nome="Thiago Lima" image="https://avatars.githubusercontent.com/u/137067860?v=4" />
+        <Column flex={3}>
+          <Title>Feed</Title>
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </Column>
+        <Column flex={1}>
+          <TitleHighLight># RANKING 5 TOP DA SEMANA</TitleHighLight>
+          <UserInfo
+            percentual={80}
+            nome="Thiago Lima"
+            image="https://avatars.githubusercontent.com/u/137067860?v=4"
+          />
+          <UserInfo
+            percentual={90}
+            nome="Thiago Lima"
+            image="https://avatars.githubusercontent.com/u/137067860?v=4"
+          />
+          <UserInfo
+            percentual={45}
+            nome="Thiago Lima"
+            image="https://avatars.githubusercontent.com/u/137067860?v=4"
+          />
+          <UserInfo
+            percentual={50}
+            nome="Thiago Lima"
+            image="https://avatars.githubusercontent.com/u/137067860?v=4"
+          />
+          <UserInfo
+            percentual={10}
+            nome="Thiago Lima"
+            image="https://avatars.githubusercontent.com/u/137067860?v=4"
+          />
+          <UserInfo
+            percentual={99}
+            nome="Thiago Lima"
+            image="https://avatars.githubusercontent.com/u/137067860?v=4"
+          />
+        </Column>
       </Container>
     </>
   );
