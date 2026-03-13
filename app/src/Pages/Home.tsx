@@ -4,7 +4,7 @@ import { Header } from "../Components/Header/Header";
 import styled from "styled-components";
 import bannerImage from "../assets/professional-challenges.png"
 import { ButtonWrapper } from "../Components/Button/ButtonWrapper";
-
+import { useNavigate } from "react-router-dom";
 
 export const Container = styled.main`
   width: 100%;
@@ -47,6 +47,9 @@ export const TextContent = styled.p`
 `;
 
 export const Home = () => {
+
+  const navigate = useNavigate();
+
   return (
     <>
       <Header autenticado={false}/>
@@ -63,7 +66,7 @@ export const Home = () => {
             Domine as tecnologias utilizadas pelas empresas mais inovadoras do mundo e encare 
             seu novo desafio profissional, evoluindo com comunidade com os melhores experts
           </TextContent>
-          <Button title="Comecar agora" variant="secondary"/>
+          <Button title="Comecar agora" variant="secondary" onClick={() => navigate("/login")}/>
         </div>
         <div>
           <img  src={ bannerImage } alt="Imagem principal"/>
