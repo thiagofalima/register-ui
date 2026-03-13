@@ -24,21 +24,34 @@ export const InputText = styled.input`
   height: 30px;
 `;
 
+const ErrorText = styled.p`
+  margin-top: 5px 0;
+  color: #ff0000;
+  font-size: 12px;
+`;
+
 // Herdando dos atributos padrão do input para o React
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   leftIcon?: any; // tipagem correta para algo que pode ser renderizado
   control?: any;
   name: string;
+  errorMessage?: string;
 }
 
-export const Input = ({ leftIcon, control,  name, ...rest }: InputProps) => {
+export const Input = ({
+  leftIcon,
+  control,
+  name,
+  errorMessage,
+  ...rest
+}: InputProps) => {
   return (
     <>
       <Controller
         name={name}
         control={control}
-        rules={{required: true}}
-        render={({ field }) => <InputText {...field} {...rest} />}
+        rules={{ required: true }}
+        render={({ field }) => <InputText {...field} {...rest}/>}
       />
       <InputContainer>
         {leftIcon ? (
@@ -47,6 +60,7 @@ export const Input = ({ leftIcon, control,  name, ...rest }: InputProps) => {
           </IconContainer>
         ) : null}
       </InputContainer>
+      {errorMessage ? <ErrorText>{errorMessage}</ErrorText> : null}
     </>
   );
 };

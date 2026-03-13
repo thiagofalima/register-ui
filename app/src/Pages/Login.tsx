@@ -92,7 +92,7 @@ type Inputs = {
 
 const schema = yup
   .object({
-    email: yup.string().email("email ão é válido").required(),
+    email: yup.string().email("email não é válido").required(),
     senha: yup.string().min(3, "No mínimo 3 caracteres").required(),
   })
   .required()
@@ -124,13 +124,14 @@ export const Login = () => {
             <LoginTitle>Façaseu cadastro</LoginTitle>
             <LoginSubtitle>Faça seu login e make the change._</LoginSubtitle>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <Input control={control} leftIcon={emailIcon} placeholder="E-mail" name="email" />
+              <Input control={control} leftIcon={emailIcon} placeholder="E-mail" name="email" errorMessage={errors.email?.message}/>
               <Input
                 leftIcon={passwordIcon}
                 placeholder="Senha"
-                name="password"
+                name="senha"
                 type="password"
                 control={control}
+                errorMessage={errors.senha?.message}
               />
               <Button title="Entrar" variant="secondary" type="submit"/>
             </form>
