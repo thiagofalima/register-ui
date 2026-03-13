@@ -92,8 +92,8 @@ type Inputs = {
 
 const schema = yup
   .object({
-    email: yup.string().email("email não é válido").required(),
-    senha: yup.string().min(3, "No mínimo 3 caracteres").required(),
+    email: yup.string().email("email não é válido").required("Campo obrigatório"),
+    senha: yup.string().min(3, "No mínimo 3 caracteres").required("Campo obrigatório"),
   })
   .required()
 
