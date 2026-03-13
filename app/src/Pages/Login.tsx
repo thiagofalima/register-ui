@@ -2,9 +2,9 @@ import { Button } from "../Components/Button/Button";
 import { Header } from "../Components/Header/Header";
 import styled from "styled-components";
 import { Input } from "../Components/Input/Input";
-import emailIcon from "../assets/icons/email.svg"
-import passwordIcon from "../assets/icons/password.svg"
-
+import emailIcon from "../assets/icons/email.svg";
+import passwordIcon from "../assets/icons/password.svg";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 export const Container = styled.main`
   width: 100%;
@@ -54,7 +54,7 @@ export const EsqueciText = styled.h2`
   font-size: 0.75em;
   line-height: 19px;
 
-  color: #E5E044;
+  color: #e5e044;
 `;
 
 export const CriarText = styled.h2`
@@ -64,53 +64,68 @@ export const CriarText = styled.h2`
   font-size: 0.75em;
   line-height: 19px;
 
-  color: #E23DD7;
+  color: #e23dd7;
 `;
 
 export const Wrapper = styled.div`
-    max-width: 300px;
-`
+  max-width: 300px;
+`;
 
 export const Column = styled.div`
-    flex: 1;
-`
+  flex: 1;
+`;
 
 export const Row = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+`;
 
-`
+type Inputs = {
+  example: string
+  exampleRequired: string
+}
 
 export const Login = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
   return (
     <>
-      <Header autenticado={false}/>
+      <Header autenticado={false} />
       <Container>
         <Column>
-          <Title> 
-            A plataforma para você aprender com experts, dominar as principais tecnologias
-            e entrar mais rápido nas empresas mais desejadas
+          <Title>
+            A plataforma para você aprender com experts, dominar as principais
+            tecnologias e entrar mais rápido nas empresas mais desejadas
           </Title>
-          </Column>
-          <Column>
-            <Wrapper>
-                <LoginTitle>Façaseu cadastro</LoginTitle>
-                <LoginSubtitle>Faça seu login e make the change._</LoginSubtitle>
-                <form>
-                    <Input leftIcon={emailIcon} placeholder="E-mail" name="email"/>
-                    <Input leftIcon={passwordIcon} placeholder="Senha" name="password" type="password"/>
-                    <Button title="Entrar" variant="secondary"/>
-                </form>
-                <Row>
-                    <EsqueciText>Esqueci minha senha</EsqueciText>
-                    <CriarText>Criar conta</CriarText>
-                </Row>
-            </Wrapper>
-          </Column>
-
+        </Column>
+        <Column>
+          <Wrapper>
+            <LoginTitle>Façaseu cadastro</LoginTitle>
+            <LoginSubtitle>Faça seu login e make the change._</LoginSubtitle>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Input control={control} leftIcon={emailIcon} placeholder="E-mail" name="email" />
+              <Input
+                leftIcon={passwordIcon}
+                placeholder="Senha"
+                name="password"
+                type="password"
+                control={control}
+              />
+              <Button title="Entrar" variant="secondary" type="submit"/>
+            </form>
+            <Row>
+              <EsqueciText>Esqueci minha senha</EsqueciText>
+              <CriarText>Criar conta</CriarText>
+            </Row>
+          </Wrapper>
+        </Column>
       </Container>
     </>
   );
