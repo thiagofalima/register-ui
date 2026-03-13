@@ -5,6 +5,8 @@ import { Input } from "../Components/Input/Input";
 import emailIcon from "../assets/icons/email.svg";
 import passwordIcon from "../assets/icons/password.svg";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
 
 export const Container = styled.main`
   width: 100%;
@@ -84,16 +86,28 @@ export const Row = styled.div`
 `;
 
 type Inputs = {
-  example: string
-  exampleRequired: string
+  email: string
+  senha: string
 }
+
+const schema = yup
+  .object({
+    email: yup.string().email("email ão é válido").required(),
+    senha: yup.string().min(3, "No mínimo 3 caracteres").required(),
+  })
+  .required()
 
 export const Login = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
-  } = useForm<Inputs>();
+    formState: { errors, isValid },
+  } = useForm<Inputs>({
+    resolver: yupResolver(schema),
+    mode: "onChange"
+  });
+
+  console.log(isValid, errors)
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
   return (
     <>
