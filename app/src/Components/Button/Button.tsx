@@ -1,7 +1,7 @@
-import { MouseEventHandler } from "react";
+import { ButtonHTMLAttributes, MouseEventHandler } from "react";
 import { ButtonWrapper } from "./ButtonWrapper";
 
-interface IButton{
+interface IButton extends ButtonHTMLAttributes<HTMLButtonElement>{
   title: string;
   variant?: "primary" | "secondary";  // Mesmo tipo da outra interface
   onClick?: MouseEventHandler<HTMLButtonElement>
