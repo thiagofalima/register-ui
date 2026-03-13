@@ -5,8 +5,10 @@ import { Input } from "../Components/Input/Input";
 import emailIcon from "../assets/icons/email.svg";
 import passwordIcon from "../assets/icons/password.svg";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { api } from "../Services/api";
+import { useNavigate } from "react-router-dom";
 
 export const Container = styled.main`
   width: 100%;
@@ -86,16 +88,29 @@ export const Row = styled.div`
 `;
 
 type Inputs = {
-  email: string
-  senha: string
+  email: string;
+  senha: string;
+};
+
+interface IUser {
+  id: number;
+  name: string;
+  email: string;
+  senha: string;
 }
 
 const schema = yup
   .object({
-    email: yup.string().email("email não é válido").required("Campo obrigatório"),
-    senha: yup.string().min(3, "No mínimo 3 caracteres").required("Campo obrigatório"),
+    email: yup
+      .string()
+      .email("email não é válido")
+      .required("Campo obrigatório"),
+    senha: yup
+      .string()
+      .min(3, "No mínimo 3 caracteres")
+      .required("Campo obrigatório"),
   })
-  .required()
+  .required();
 
 export const Login = () => {
   const {
@@ -104,11 +119,34 @@ export const Login = () => {
     formState: { errors, isValid },
   } = useForm<Inputs>({
     resolver: yupResolver(schema),
-    mode: "onChange"
+    mode: "onChange",
   });
 
-  console.log(isValid, errors)
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  console.log(isValid, errors);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+    // Tipamos a resposta do Axios como um array de IUser
+    const { data: users } = await api.get<IUser[]>("/users");
+
+    // O TypeScript agora sabe que 'u' tem as propriedades email e senha
+    const userAuthenticated = users.find(
+      (u) => u.email === data.email && u.senha === data.senha
+    );
+
+    if (userAuthenticated) {
+      console.log("Usuário autenticado:", userAuthenticated);
+      navigate("/feed");
+    } else {
+      alert("E-mail ou senha inválidos.");
+    }
+  } catch (error) {
+    alert("Erro ao conectar com a API.");
+    console.error(error);
+  }
+};
+
+  const navigate = useNavigate();
+
   return (
     <>
       <Header autenticado={false} />
@@ -124,7 +162,13 @@ export const Login = () => {
             <LoginTitle>Façaseu cadastro</LoginTitle>
             <LoginSubtitle>Faça seu login e make the change._</LoginSubtitle>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <Input control={control} leftIcon={emailIcon} placeholder="E-mail" name="email" errorMessage={errors.email?.message}/>
+              <Input
+                control={control}
+                leftIcon={emailIcon}
+                placeholder="E-mail"
+                name="email"
+                errorMessage={errors.email?.message}
+              />
               <Input
                 leftIcon={passwordIcon}
                 placeholder="Senha"
@@ -133,7 +177,7 @@ export const Login = () => {
                 control={control}
                 errorMessage={errors.senha?.message}
               />
-              <Button title="Entrar" variant="secondary" type="submit"/>
+              <Button title="Entrar" variant="secondary" type="submit" />
             </form>
             <Row>
               <EsqueciText>Esqueci minha senha</EsqueciText>
