@@ -1,10 +1,8 @@
-import { Link } from "react-router-dom";
 import { Button } from "../Components/Button/Button";
 import { Header } from "../Components/Header/Header";
 import styled from "styled-components";
 import bannerImage from "../assets/professional-challenges.png"
-import { ButtonWrapper } from "../Components/Button/ButtonWrapper";
-
+import { useNavigate } from "react-router-dom";
 
 export const Container = styled.main`
   width: 100%;
@@ -13,7 +11,7 @@ export const Container = styled.main`
   margin-top: 120px;
 
   display: flex;
-  fles-direction: rox;
+  fles-direction: row;
   justify-content: space-between;
   align-items: center;
 `;
@@ -47,6 +45,13 @@ export const TextContent = styled.p`
 `;
 
 export const Home = () => {
+
+  const navigate = useNavigate();
+
+  const handleClickSignIn = () => {
+    navigate("/login")
+  }
+
   return (
     <>
       <Header autenticado={false}/>
@@ -63,7 +68,7 @@ export const Home = () => {
             Domine as tecnologias utilizadas pelas empresas mais inovadoras do mundo e encare 
             seu novo desafio profissional, evoluindo com comunidade com os melhores experts
           </TextContent>
-          <Button title="Comecar agora" variant="secondary"/>
+          <Button title="Comecar agora" variant="secondary" onClick={handleClickSignIn}/>
         </div>
         <div>
           <img  src={ bannerImage } alt="Imagem principal"/>
