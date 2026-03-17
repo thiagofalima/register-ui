@@ -147,6 +147,9 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
+  const handleClickSignIn = () => {
+    navigate("/feed");
+  };
   return (
     <>
       <Header autenticado={false} />
@@ -188,4 +191,4 @@ export const Login = () => {
       </Container>
     </>
   );
-};
+}
