@@ -1,5 +1,7 @@
-export interface IAuthContext {
+import { IUser } from "../types/user";
 
+export interface IAuthContext {
+    user: IUser
 }
 
 export interface IAuthContextProviderProps {
