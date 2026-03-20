@@ -7,6 +7,9 @@ import userIcon from "../assets/icons/user.svg";
 import { Button } from "../Components/Button/Button";
 import { MouseEventHandler } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 const Container = styled.div`
   width: 80vw;
@@ -102,12 +105,33 @@ type RegisterValues = {
   name: string;
   email: string;
   password: string;
-}
+};
+
+const schema = yup
+  .object({
+    name: yup.string().required("Campo obrigatório"),
+    email: yup
+      .string()
+      .email("email não é válido")
+      .required("Campo obrigatório"),
+    senha: yup
+      .string()
+      .min(3, "No mínimo 3 caracteres")
+      .required("Campo obrigatório"),
+  })
+  .required();
 
 export const Register = () => {
   const navigate = useNavigate();
 
-  
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<RegisterValues>({
+    resolver: yupResolver(schema),
+    mode: "onChange",
+  });
 
   return (
     <>
@@ -126,18 +150,21 @@ export const Register = () => {
           </RegisterSubTitle>
           <form>
             <Input
+              control={control}
               name="nome"
               type="text"
               placeholder="Nome completo"
               leftIcon={userIcon}
             />
             <Input
+              control={control}
               name="email"
               type="email"
               placeholder="E-mail"
               leftIcon={emailIcon}
             />
             <Input
+              control={control}
               name="senha"
               type="password"
               placeholder="Senha"
