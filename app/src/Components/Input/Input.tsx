@@ -47,18 +47,18 @@ export const Input = ({
 }: InputProps) => {
   return (
     <>
-      <Controller
-        name={name}
-        control={control}
-        rules={{ required: true }}
-        render={({ field }) => <InputText {...field} {...rest} />}
-      />
       <InputContainer>
         {leftIcon ? (
           <IconContainer>
             <img src={leftIcon} />
           </IconContainer>
         ) : null}
+        <Controller
+          name={name}
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => <InputText {...field} {...rest} />}
+        />
       </InputContainer>
       {errorMessage ? <ErrorText>{errorMessage}</ErrorText> : null}
     </>
