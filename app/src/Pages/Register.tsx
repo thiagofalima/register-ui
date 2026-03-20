@@ -104,7 +104,7 @@ const FazerLoginText = styled.a`
 type RegisterValues = {
   name: string;
   email: string;
-  password: string;
+  senha: string;
 };
 
 const schema = yup
@@ -116,7 +116,7 @@ const schema = yup
       .required("Campo obrigatório"),
     senha: yup
       .string()
-      .min(3, "No mínimo 3 caracteres")
+      .min(3, "No mínimo 6 caracteres")
       .required("Campo obrigatório"),
   })
   .required();
@@ -130,7 +130,8 @@ export const Register = () => {
     formState: { errors, isValid },
   } = useForm<RegisterValues>({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: "onBlur", // validação sempre que sair do campo
+    reValidateMode: "onChange", // revalidar assim que alterar o campo
   });
 
   return (

@@ -51,7 +51,7 @@ export const Input = ({
         name={name}
         control={control}
         rules={{ required: true }}
-        render={({ field }) => <InputText {...field} {...rest}/>}
+        render={({ field }) => <InputText {...field} {...rest} />}
       />
       <InputContainer>
         {leftIcon ? (
