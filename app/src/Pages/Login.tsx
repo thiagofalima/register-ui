@@ -10,6 +10,7 @@ import * as yup from "yup";
 import { api } from "../Services/api";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
+import { AuthContext } from "../context/auth";
 
 export const Container = styled.main`
   width: 100%;
@@ -88,7 +89,7 @@ export const Row = styled.div`
   margin-top: 20px;
 `;
 
-type Inputs = {
+type FormData = {
   email: string;
   senha: string;
 };
@@ -114,20 +115,23 @@ const schema = yup
   .required();
 
 export const Login = () => {
+  const {} = useContext(AuthContext)
+
   const {
     control,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<Inputs>({
+  } = useForm<FormData>({
     resolver: yupResolver(schema),
     mode: "onChange",
   });
 
   console.log(isValid, errors);
 
+  const onSubmit = async (formData: FormData) => {
 
-  const navigate = useNavigate();
-  
+  }
+
   return (
     <>
       <Header autenticado={false} />
