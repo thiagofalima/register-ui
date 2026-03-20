@@ -84,11 +84,7 @@ const JaTenhoText = styled.p`
   color: #ffffff;
 `;
 
-interface IFazerLogin{
-    onClick?: MouseEventHandler<HTMLAnchorElement>
-}
-
-const FazerLoginText= styled.a<IFazerLogin>`
+const FazerLoginText = styled.a`
   height: 19px;
   top: 584px;
   display: inline-flex;
@@ -102,10 +98,16 @@ const FazerLoginText= styled.a<IFazerLogin>`
   color: #22ac67;
 `;
 
+type RegisterValues = {
+  name: string;
+  email: string;
+  password: string;
+}
 
 export const Register = () => {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate()
+  
 
   return (
     <>
@@ -149,7 +151,9 @@ export const Register = () => {
           </RegisterSubTitle>
           <Row>
             <JaTenhoText>Já tenho conta.</JaTenhoText>
-            <FazerLoginText onClick={ () => navigate("/login")}>Fazer login.</FazerLoginText>
+            <FazerLoginText onClick={() => navigate("/login")}>
+              Fazer login.
+            </FazerLoginText>
           </Row>
         </Column>
       </Container>
