@@ -115,7 +115,7 @@ const schema = yup
   .required();
 
 export const Login = () => {
-  const {} = useContext(AuthContext)
+  const {handleLogin} = useContext(AuthContext)
 
   const {
     control,
@@ -129,7 +129,7 @@ export const Login = () => {
   console.log(isValid, errors);
 
   const onSubmit = async (formData: FormData) => {
-
+    handleLogin(formData)
   }
 
   return (
@@ -162,7 +162,7 @@ export const Login = () => {
                 control={control}
                 errorMessage={errors.senha?.message}
               />
-              <Button title="Entrar" variant="secondary" type="submit" />
+              <Button title="Entrar" variant="secondary" type="submit" onSubmit={() => onSubmit()} />
             </form>
             <Row>
               <EsqueciText>Esqueci minha senha</EsqueciText>
