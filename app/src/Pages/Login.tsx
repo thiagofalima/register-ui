@@ -94,7 +94,7 @@ type Inputs = {
 
 interface IUser {
   id: number;
-  name: string;
+  nome: string;
   email: string;
   senha: string;
 }
@@ -123,27 +123,7 @@ export const Login = () => {
   });
 
   console.log(isValid, errors);
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    try {
-    // Tipamos a resposta do Axios como um array de IUser
-    const { data: users } = await api.get<IUser[]>("/users");
 
-    // O TypeScript agora sabe que 'u' tem as propriedades email e senha
-    const userAuthenticated = users.find(
-      (u) => u.email === data.email && u.senha === data.senha
-    );
-
-    if (userAuthenticated) {
-      console.log("Usuário autenticado:", userAuthenticated);
-      navigate("/feed");
-    } else {
-      alert("E-mail ou senha inválidos.");
-    }
-  } catch (error) {
-    alert("Erro ao conectar com a API.");
-    console.error(error);
-  }
-};
 
   const navigate = useNavigate();
 
