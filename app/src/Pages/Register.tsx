@@ -102,14 +102,14 @@ const FazerLoginText = styled.a`
 `;
 
 type RegisterValues = {
-  name: string;
+  nome: string;
   email: string;
   senha: string;
 };
 
 const schema = yup
   .object({
-    name: yup.string().required("Campo obrigatório"),
+    nome: yup.string().required("Campo obrigatório"),
     email: yup
       .string()
       .email("email não é válido")
@@ -156,6 +156,7 @@ export const Register = () => {
               type="text"
               placeholder="Nome completo"
               leftIcon={userIcon}
+              errorMessage={errors.nome?.message}
             />
             <Input
               control={control}
@@ -163,6 +164,7 @@ export const Register = () => {
               type="email"
               placeholder="E-mail"
               leftIcon={emailIcon}
+              errorMessage={errors.email?.message}
             />
             <Input
               control={control}
@@ -170,6 +172,7 @@ export const Register = () => {
               type="password"
               placeholder="Senha"
               leftIcon={passwordIcon}
+              errorMessage={errors.senha?.message}
             />
           </form>
           <Button title="Criar minha conta" variant="secondary" />
