@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { api } from "../Services/api";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 export const Container = styled.main`
   width: 100%;
@@ -126,10 +127,7 @@ export const Login = () => {
 
 
   const navigate = useNavigate();
-
-  const handleClickSignIn = () => {
-    navigate("/feed");
-  };
+  
   return (
     <>
       <Header autenticado={false} />
